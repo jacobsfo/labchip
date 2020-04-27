@@ -19,13 +19,14 @@ DDRA = 0x00; PORTA = 0xFF;
 DDRC = 0xFF; PORTC = 0x00;
 unsigned char tmpA = 0x00;
 
- //  state = start; 
+ 
 
     
     while (1) {
        
          tmpA = PINA;
-         tmpA = ~PINA & 0x01;
+         tmpA = ~PINA & 0x0F;
+         
          
     switch(state)
     {   
@@ -34,14 +35,14 @@ unsigned char tmpA = 0x00;
         break;
 
         case init:
-//	state = init;
-          if(tmpA != 0xFE && tmpA != 0xFD )
+
+          if(tmpA != 0x01 && tmpA!= 0x02 )
             state = init;
-            if(tmpA == 0xFD)
+            if(tmpA == 0x02)
             {
                 state = dec;
             }
-            if(tmpA == 0xFE)
+            if(tmpA == 0x01)
             {
                 state = inc;
             }
@@ -49,22 +50,22 @@ unsigned char tmpA = 0x00;
             break;
 
         case inc:
-            if(tmpA == 0xFE)
+            if(tmpA == 0x01)
             {
                
-          
+          PORTC = 0x00;
             state = inc;
             
             }
-         
+        
             else{state = reset;}
     
         
             break;
         case dec:
-            if(tmpA == 0xFD)
+            if(tmpA == 0x02)
             {
-                state = dec;
+                state = init;
             }  
             
             else
@@ -78,26 +79,25 @@ unsigned char tmpA = 0x00;
         
         
         case reset:
-            if(tmpA != 0xFE)
+            if(tmpA == 0x01)
             {
                 state = wait;
             }
 
-	    if(tmpA != 0xFD)
+	    if(tmpA == 0x02)
 	{
 		state = wait;	
 	}    
 		else
 		{
 		state = reset;
-
 		}
         break;
 case wait:
-if(tmpA == 0xFE)
-{ state = wait;}
-if(tmpA == 0xFD)
-{ state = wait;}
+if(tmpA == 0x01)
+{ state = inc;}
+if(tmpA == 0x02)
+{ state = dec;}
 break;
 
         default:
@@ -116,9 +116,9 @@ break;
         break;
 
         case dec:
-        if(PORTC!=0x00)
+        if(PORTC != 0x00)
         {PORTC = PORTC - 1;}
-	else{PORTC = 0x00;}
+	
         break;
 
         case inc:
@@ -133,7 +133,7 @@ break;
         break;
         default:
      case wait:
-    PORTC = PORTC;   
+   
         break;
 
 
@@ -143,8 +143,8 @@ break;
     }
 
 
-//PORTB = PORTB + 1;
 
 
 return 0;
+
 }

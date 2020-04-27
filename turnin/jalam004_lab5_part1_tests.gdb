@@ -1,4 +1,4 @@
-# Test file for "Lab3"
+# Test file for "Lab5"
 
 
 # commands.gdb provides the following functions for ease:
@@ -27,101 +27,25 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 # Example test:
-test "PINA: 0x00 => PORTC: 0x00"
-setPINA 0x00
+test "PINA: 0xFF => PORTC: 0x40"
+setPINA 0xFF
 continue 2
 expectPORTC 0x40
 checkResult
 
-test "PINA: 0x01 => PORTC: 0x60"
-setPINA 0x01
-continue 2
-expectPORTC 0x60
-checkResult
-
-test "PINA: 0x02 => PORTC: 0x60"
-setPINA 0x02
-continue 2
-expectPORTC 0x60
-checkResult
-
-test "PINA: 0x03 => PORTC: 0x70"
-setPINA 0x03
+test "PINA: 0x7C => PORTC: 0x70"
+setPINA 0x7C
 continue 2
 expectPORTC 0x70
 checkResult
 
-test "PINA: 0x04 => PORTC: 0x70"
-setPINA 0x04
-continue 2
-expectPORTC 0x70
-checkResult
-
-test "PINA: 0x05 => PORTC: 0x38"
-setPINA 0x05
-continue 2
-expectPORTC 0x38
-checkResult
-
-test "PINA: 0x06 => PORTC: 0x38"
-setPINA 0x06
-continue 2
-expectPORTC 0x38
-checkResult
-
-test "PINA: 0x07 => PORTC: 0x3C"
-setPINA 0x07
+test "PINA: 0xF8 => PORTC: 0x3C"
+setPINA 0xF8
 continue 2
 expectPORTC 0x3C
 checkResult
 
-test "PINA: 0x08 => PORTC: 0x3C"
-setPINA 0x07
-continue 2
-expectPORTC 0x3C
-checkResult
 
-test "PINA: 0x09 => PORTC: 0x3C"
-setPINA 0x09
-continue 2
-expectPORTC 0x3C
-checkResult
-
-test "PINA: 0x0A => PORTC: 0x3E"
-setPINA 0x0A
-continue 2
-expectPORTC 0x3E
-checkResult
-
-test "PINA: 0x0B => PORTC: 0x3E"
-setPINA 0x0B
-continue 2
-expectPORTC 0x3E
-checkResult
-
-test "PINA: 0x0C => PORTC: 0x3E"
-setPINA 0x0C
-continue 2
-expectPORTC 0x3E
-checkResult
-
-test "PINA: 0x0D => PORTC: 0x3F"
-setPINA 0x0D
-continue 2
-expectPORTC 0x3F
-checkResult
-
-test "PINA: 0x0E => PORTC: 0x3F"
-setPINA 0x0E
-continue 2
-expectPORTC 0x3F
-checkResult
-
-test "PINA: 0x0F => PORTC: 0x3F"
-setPINA 0x0D
-continue 2
-expectPORTC 0x3F
-checkResult
 # Add tests below
 
 # Report on how many tests passed/tests ran
