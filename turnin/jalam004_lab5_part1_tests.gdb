@@ -28,6 +28,7 @@ echo Running all tests..."\n\n
 
 # Example test:
 test "PINA: 0xFF => PORTC: 0x40"
+<<<<<<< HEAD
 setPINA 0xFF
 continue 2
 expectPORTC 0x40
@@ -44,6 +45,8 @@ setPINA 0xF8
 continue 2
 expectPORTC 0x3C
 checkResult
+
+
 
 
 # Add tests below
