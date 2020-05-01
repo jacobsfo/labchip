@@ -1,7 +1,7 @@
 /*	Author: jalam004
  *  Partner(s) Name: 
  *	Lab Section:
- *	Assignment: Lab #  Exercise #
+ *	Assignment: Lab 5  Exercise 2
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
@@ -18,15 +18,15 @@ enum States{start,init,inc,dec,reset,wait} state;
 DDRA = 0x00; PORTA = 0xFF;
 DDRC = 0xFF; PORTC = 0x00;
 unsigned char tmpA = 0x00;
-
+unsigned char tmpB = 0x00;
  
-
+state = start;
     
     while (1) {
        
-         tmpA = PINA;
-         tmpA = ~PINA & 0x0F;
-         
+         //tmpA = PINA;
+         tmpA = ~PINA & 0x01;
+         tmpB = ~PINA & 0x02;
          
     switch(state)
     {   
@@ -36,13 +36,13 @@ unsigned char tmpA = 0x00;
 
         case init:
 
-          if(tmpA != 0x01 && tmpA!= 0x02 )
+          if((tmpA && tmpB) || (!tmpA && !tmpB))
             state = init;
-            if(tmpA == 0x02)
+            if(tmpB)
             {
                 state = dec;
             }
-            if(tmpA == 0x01)
+            if(tmpA)
             {
                 state = inc;
             }
@@ -50,10 +50,10 @@ unsigned char tmpA = 0x00;
             break;
 
         case inc:
-            if(tmpA == 0x01)
+            if(tmpA)
             {
                
-          PORTC = 0x00;
+//          PORTC = 0x00;
             state = inc;
             
             }
@@ -63,9 +63,10 @@ unsigned char tmpA = 0x00;
         
             break;
         case dec:
-            if(tmpA == 0x02)
+            if(tmpB)
             {
-                state = init;
+             state = init;
+	     //state = dec;
             }  
             
             else
@@ -79,12 +80,12 @@ unsigned char tmpA = 0x00;
         
         
         case reset:
-            if(tmpA == 0x01)
+            if(tmpA)
             {
                 state = wait;
             }
 
-	    if(tmpA == 0x02)
+	    if(tmpB)
 	{
 		state = wait;	
 	}    
@@ -94,9 +95,9 @@ unsigned char tmpA = 0x00;
 		}
         break;
 case wait:
-if(tmpA == 0x01)
+if(tmpA )
 { state = inc;}
-if(tmpA == 0x02)
+if(tmpB)
 { state = dec;}
 break;
 
@@ -139,8 +140,8 @@ break;
 
 
     }
-
-    }
+//continue;
+  }
 
 
 
